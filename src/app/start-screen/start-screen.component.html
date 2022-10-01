@@ -1,9 +1,8 @@
 <div class="start-screen">
-    <img src="assets/img/fire.jpg">
-    <!-- <img src="assets/img/startbox.png"> -->
+    <img src="assets/img/bg.PNG">
 
     <div class="start-label-box">
         <h1 class="fire">RING OF FIRE</h1>
-        <img (click)="newGame()" src="assets/img/startlabel.png">
+        <button (click)="newGame()" [class.btn-animation]="btnAnimation">START GAME</button>
     </div>
 </div>

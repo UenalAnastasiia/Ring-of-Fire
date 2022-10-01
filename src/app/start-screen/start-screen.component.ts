@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./start-screen.component.scss']
 })
 export class StartScreenComponent implements OnInit {
+  btnAnimation = false;
 
   constructor(private router: Router) { }
 
@@ -14,8 +15,11 @@ export class StartScreenComponent implements OnInit {
   }
 
   newGame() {
-    // Start Game
-    this.router.navigateByUrl('/game');
+    this.btnAnimation = true;
+
+    setTimeout(() => {
+      this.router.navigateByUrl('/game');
+    }, 1000);
   }
 
 }

@@ -1,5 +1,4 @@
 .start-screen {
-    // background-color: #404040;
     width: 100vw;
     height: 100vh;
     max-width: 100%;
@@ -22,8 +21,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background:rgb(255 255 255 / 23%);
-    ;
+    background: rgb(0 0 0 / 35%);
     height: 100vh;
 
     h1 {
@@ -31,15 +29,22 @@
         font-size: 120px;
         font-weight: 600;
         margin-top: 0;
+        margin-bottom: 32px;
     }
 
-    img {
-        width: 30vw;
-        height: auto;
+    button {
+        font-size: 52px;
+        font-weight: 600;
+        color: white;
+        background: radial-gradient(#dfc6a0, rgb(255 97 0));;
+        padding: 16px;
+        border-radius: 50px;
+        border: 5px solid white;
+        position: relative;
 
         &:hover {
-            filter: brightness(1.2);
             cursor: pointer;
+            filter: brightness(1.2);
         }
     }
 }
@@ -50,52 +55,104 @@
     font-size: 10vw;
     outline: none;
     text-shadow:
-      0 0 20px crimson,
-      0 0 20px crimson,
-      0 0 10px crimson,
-      5px -10px 10px orange,
-      -5px -10px 10px yellow;
+        0 0 20px crimson,
+        0 0 20px crimson,
+        0 0 10px crimson,
+        5px -10px 10px orange,
+        -5px -10px 10px yellow;
     animation: 2s flame infinite alternate linear;
-  }
-  
-  @keyframes flame {
-    0%   { 
-      text-shadow: 0 10px 20px crimson, 0 0 20px red,
-      0 0 10px orange,
-      0 0 10px darkorange,
-      -5px -5px 5px yellow,
-      10px -10px 10px yellow; 
+}
+
+.btn-animation {
+    animation: btnBurn 1000ms ease-out forwards;
+
+    &::before {
+        content: '';
+        position: absolute;
+        left: 40px;
+        width: 100px;
+        height: 40px;
+        border-radius: 100%;
+        animation: btnFlare 1000ms ease-out forwards;
     }
 
-    25%   { 
-      text-shadow: 0 10px 20px crimson, 0 0 20px red,
-      0 0 20px orange,
-      -5px -5px 5px yellow,
-      5px -10px 10px yellow,
-      -5px -10px 10px yellow; 
+    &::after {
+        content: '';
+        position: absolute;
+        right: 40px;
+        width: 100px;
+        height: 40px;
+        border-radius: 100%;
+        animation: flare 1000ms ease-out forwards;
+    }
+}
+
+
+// ########### KEYFRAMES ########### //
+@keyframes flame {
+    0% {
+        text-shadow: 0 10px 20px crimson, 0 0 20px red,
+            0 0 10px orange,
+            0 0 10px darkorange,
+            -5px -5px 5px yellow,
+            10px -10px 10px yellow;
     }
 
-    50%   { 
-      text-shadow: 0 10px 20px crimson, 0 0 20px red,
-      0 0 10px orange,
-      0 0 10px darkorange,
-      -5px -5px 5px yellow,
-      10px -10px 10px yellow; 
+    25% {
+        text-shadow: 0 10px 20px crimson, 0 0 20px red,
+            0 0 20px orange,
+            -5px -5px 5px yellow,
+            5px -10px 10px yellow,
+            -5px -10px 10px yellow;
     }
 
-    75%   { 
-      text-shadow: 0 10px 20px crimson, 0 0 20px red,
-      0 0 20px orange,
-      -5px -5px 5px yellow,
-      5px -10px 10px yellow,
-      -5px -10px 10px yellow; 
+    50% {
+        text-shadow: 0 10px 20px crimson, 0 0 20px red,
+            0 0 10px orange,
+            0 0 10px darkorange,
+            -5px -5px 5px yellow,
+            10px -10px 10px yellow;
     }
 
-    100%   { 
-      text-shadow: 0 10px 20px crimson, 0 0 20px red,
-      0 0 10px orange,
-      0 0 10px darkorange,
-      -5px -5px 5px yellow,
-      10px -10px 10px yellow; 
+    75% {
+        text-shadow: 0 10px 20px crimson, 0 0 20px red,
+            0 0 20px orange,
+            -5px -5px 5px yellow,
+            5px -10px 10px yellow,
+            -5px -10px 10px yellow;
     }
-  }
+
+    100% {
+        text-shadow: 0 10px 20px crimson, 0 0 20px red,
+            0 0 10px orange,
+            0 0 10px darkorange,
+            -5px -5px 5px yellow,
+            10px -10px 10px yellow;
+    }
+}
+
+@keyframes btnFlare {
+    100% {
+        transform: translateY(-20px) scale(1.5);
+        filter: blur(10px);
+        opacity: 0;
+    }
+}
+
+@keyframes btnBurn {
+    0% {
+        color: rgba(255, 130, 110, 1);
+        box-shadow:
+            0 0 5px 0 rgba(200, 0, 10, 1),
+            0 0 5px 0 rgba(230, 30, 10, 0.8),
+            0 0 5px 0 rgba(230, 230, 10, 0.6);
+    }
+
+    100% {
+        color: rgb(189, 7, 7);
+        box-shadow:
+            0px -35px 40px 30px rgba(255, 130, 10, 0),
+            0 -30px 30px 10px rgba(230, 30, 10, 0),
+            0 -20px 10px 0 rgba(255, 255, 10, 0);
+    }
+}
