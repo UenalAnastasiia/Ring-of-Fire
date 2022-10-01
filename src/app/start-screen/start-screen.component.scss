@@ -22,11 +22,15 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    background:rgb(255 255 255 / 23%);
+    ;
+    height: 100vh;
 
     h1 {
         color: white;
-        font-size: 52px;
+        font-size: 120px;
         font-weight: 600;
+        margin-top: 0;
     }
 
     img {
@@ -39,3 +43,59 @@
         }
     }
 }
+
+.fire {
+    text-align: center;
+    color: rgb(255, 115, 0);
+    font-size: 10vw;
+    outline: none;
+    text-shadow:
+      0 0 20px crimson,
+      0 0 20px crimson,
+      0 0 10px crimson,
+      5px -10px 10px orange,
+      -5px -10px 10px yellow;
+    animation: 2s flame infinite alternate linear;
+  }
+  
+  @keyframes flame {
+    0%   { 
+      text-shadow: 0 10px 20px crimson, 0 0 20px red,
+      0 0 10px orange,
+      0 0 10px darkorange,
+      -5px -5px 5px yellow,
+      10px -10px 10px yellow; 
+    }
+
+    25%   { 
+      text-shadow: 0 10px 20px crimson, 0 0 20px red,
+      0 0 20px orange,
+      -5px -5px 5px yellow,
+      5px -10px 10px yellow,
+      -5px -10px 10px yellow; 
+    }
+
+    50%   { 
+      text-shadow: 0 10px 20px crimson, 0 0 20px red,
+      0 0 10px orange,
+      0 0 10px darkorange,
+      -5px -5px 5px yellow,
+      10px -10px 10px yellow; 
+    }
+
+    75%   { 
+      text-shadow: 0 10px 20px crimson, 0 0 20px red,
+      0 0 20px orange,
+      -5px -5px 5px yellow,
+      5px -10px 10px yellow,
+      -5px -10px 10px yellow; 
+    }
+
+    100%   { 
+      text-shadow: 0 10px 20px crimson, 0 0 20px red,
+      0 0 10px orange,
+      0 0 10px darkorange,
+      -5px -5px 5px yellow,
+      10px -10px 10px yellow; 
+    }
+  }
