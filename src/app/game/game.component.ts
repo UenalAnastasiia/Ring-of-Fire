@@ -22,11 +22,19 @@ export class GameComponent implements OnInit {
     console.log(this.game);
   }
 
+  // pop() => The last value is taken from the array and then it is removed
   takeCard() {
-    // pop() => The last value is taken from the array and then it is removed
-    this.currentCard = this.game.stack.pop();
-    console.log(this.currentCard);
-    this.takeCardAnimation = true;
+    if (!this.takeCardAnimation) {
+      this.currentCard = this.game.stack.pop();
+      this.takeCardAnimation = true;
+      console.log('New Card: ' + this.currentCard);
+      console.log('Game is: ' + this.game.playedCards);
+
+      setTimeout(() => {
+        this.takeCardAnimation = false;
+        this.game.playedCards.push(this.currentCard);
+      }, 1000);
+    }
   }
 
 }
