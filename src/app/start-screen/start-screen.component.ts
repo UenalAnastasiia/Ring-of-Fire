@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 })
 export class StartScreenComponent implements OnInit {
   btnAnimation = false;
+  btnFire = false;
 
   constructor(private router: Router) { }
 
@@ -16,10 +17,11 @@ export class StartScreenComponent implements OnInit {
 
   newGame() {
     this.btnAnimation = true;
+    this.btnFire = true;
 
     setTimeout(() => {
       this.router.navigateByUrl('/game');
-    }, 1000);
+    }, 3000);
   }
 
 }
