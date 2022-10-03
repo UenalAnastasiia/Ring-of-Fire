@@ -2,7 +2,7 @@
     width: 100vw;
     height: 100vh;
     max-width: 100%;
-    background-image: url('/assets/img/board.jpg');
+    background-image: url('../../assets/img/board.jpg');
     background-size: cover;
     display: flex;
     justify-content: center;
@@ -20,6 +20,7 @@
 
 .top-card {
     cursor: pointer;
+    filter: none !important;
     transition: all 225ms ease-in-out;
 
     &:hover {
@@ -63,7 +64,7 @@
 .btn-add {
    position: absolute;
    right: 32px;
-   bottom: 32px; 
+   bottom: 48px; 
 }
 
 .pin-bottom {

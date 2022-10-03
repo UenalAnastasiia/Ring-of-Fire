@@ -10,6 +10,7 @@ import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player
 })
 export class GameComponent implements OnInit {
   takeCardAnimation = false;
+  noFilter = false;
   game: Game;
   currentCard: string = '';
 
@@ -26,7 +27,7 @@ export class GameComponent implements OnInit {
 
   // pop() => The last value is taken from the array and then it is removed
   takeCard() {
-    if (!this.takeCardAnimation) {
+    if (!this.takeCardAnimation && this.game.players.length > 0) {
       this.currentCard = this.game.stack.pop();
       this.takeCardAnimation = true;
 
@@ -45,6 +46,7 @@ export class GameComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((name: string) => {
       if (name && name.length > 0) {
+        this.noFilter = true;
         this.game.players.push(name);
       }
     });
