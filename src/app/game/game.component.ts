@@ -21,16 +21,14 @@ export class GameComponent implements OnInit {
 
   newGame() {
     this.game = new Game();
-    console.log(this.game);
   }
+
 
   // pop() => The last value is taken from the array and then it is removed
   takeCard() {
     if (!this.takeCardAnimation) {
       this.currentCard = this.game.stack.pop();
       this.takeCardAnimation = true;
-      console.log('New Card: ' + this.currentCard);
-      console.log('Game is: ' + this.game.playedCards);
 
       this.game.currentPlayer++;
       this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
@@ -46,7 +44,9 @@ export class GameComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogAddPlayerComponent);
 
     dialogRef.afterClosed().subscribe((name: string) => {
-      this.game.players.push(name);
+      if (name && name.length > 0) {
+        this.game.players.push(name);
+      }
     });
   }
 }
