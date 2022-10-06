@@ -1,0 +1,21 @@
+{
+  "targets": {
+    "aue-ringoffire": {
+      "hosting": {
+        "ringoffire": [
+          "aue-ringoffire"
+        ]
+      }
+    },
+    "ua-ringoffire": {
+      "hosting": {
+        "ringoffire": [
+          "ua-ringoffire"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "ua-ringoffire"
+  }
+}
