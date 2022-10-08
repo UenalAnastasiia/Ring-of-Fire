@@ -18,7 +18,6 @@ import { MatCardModule } from '@angular/material/card';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
-import { EditNewPlayerComponent } from './edit-new-player/edit-new-player.component';
 
 
 @NgModule({
@@ -28,8 +27,7 @@ import { EditNewPlayerComponent } from './edit-new-player/edit-new-player.compon
     GameComponent,
     PlayerComponent,
     DialogAddPlayerComponent,
-    GameInfoComponent,
-    EditNewPlayerComponent
+    GameInfoComponent
   ],
   imports: [
     BrowserModule,
