@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Game } from 'src/models/game';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
-import { Firestore, collection, addDoc, doc, updateDoc, onSnapshot,docData } from '@angular/fire/firestore';
+import { Firestore, collection, addDoc, doc, updateDoc, onSnapshot, docData } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -24,38 +24,37 @@ export class GameComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router, public firestore: Firestore, public dialog: MatDialog) { }
   ngOnInit(): void {
     this.newGame();
-    this.route.params.subscribe(param => {
-      this.gameID = param['id'];
+    this.route.params.subscribe(newGame => {
+      this.gameID = newGame['id'];
       const docRef = doc(this.firestore, 'games', this.gameID);
       this.games$ = docData(docRef);
+      this.loadGame();
+    });
+    // this.games$.subscribe((newGame: any) => {
+    //   console.log('Update: ', newGame);
+    // })
+  }
 
-      this.games$.subscribe( () => {
-        this.getDoc(this.gameID);
-      });
-      // this.games$.subscribe(game => {
-      //   this.game.players = game['players'];
-      //   this.game.stack = game['stack'];
-      //   this.game.playedCards = game['playedCards'];
-      //   this.game.currentPlayer = game['currentPlayer'];
-      // })
+
+  loadGame() {
+    this.games$.subscribe( (newGame: any) => {
+      this.getDoc(this.gameID);
+      this.game.players = newGame['players'];
+      this.game.stack = newGame['stack'];
+      this.game.playedCards = newGame['playedCards'];
+      this.game.currentPlayer = newGame['currentPlayer'];
     });
   }
 
-  // getDoc(doc(gameCollection, params['id'])).then( game => console.log(game) );
-
-  // this.games$.subscribe( (newGame: any) => {
-  //   console.log('Update: ', newGame);
-  // })
-  // });
 
   async restartGame() {
     let game = new Game();
 
     const gameCollection = collection(this.firestore, 'games');
-    await addDoc(gameCollection, { game: game.toJSON() }
-    ).then( () => {
+    await addDoc(gameCollection, { game: game.toJSON() }).then(() => {
       this.router.navigateByUrl('/game/' + this.gameID);
     });
+
     this.gameOver = false;
   }
 
@@ -66,7 +65,8 @@ export class GameComponent implements OnInit {
     });
   }
 
-  newGame() {
+
+  async newGame() {
     this.game = new Game();
     // const gameCollection = collection(this.firestore, 'games');
     // const gameDocumentReference = await addDoc(gameCollection, { game: this.game.toJSON() });
@@ -75,6 +75,7 @@ export class GameComponent implements OnInit {
 
     // this.route.params.subscribe((params) => {
     //   console.log(params['id']);
+    // });
 
     //   const gameCollection = collection(this.firestore, 'games');
 
@@ -99,20 +100,23 @@ export class GameComponent implements OnInit {
 
       this.game.currentPlayer++;
       this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
-
       this.saveGame();
-
-      setTimeout(() => {
-        this.takeCardAnimation = false;
-        this.game.playedCards.push(this.currentCard);
-      }, 1000);
+      this.cardAnimation();
     }
+  }
+
+
+  cardAnimation() {
+    setTimeout(() => {
+      this.takeCardAnimation = false;
+      this.game.playedCards.push(this.currentCard);
+    }, 1000);
   }
 
 
   // editPlayer(playerId) {
   //   console.log('edit player', playerId);
-    
+
   //   const dialogRef = this.dialog.open(EditNewPlayerComponent);
   //   dialogRef.afterClosed().subscribe((change: string) => {
   //       if (change == 'DELETE') {
@@ -131,14 +135,12 @@ export class GameComponent implements OnInit {
         this.game.players.push(name);
         this.noFilter = true;
         this.saveGame();
-      } else {
-        this.noFilter = false;
       }
     });
   }
 
 
   saveGame() {
-    updateDoc(doc(this.firestore,'games', this.gameID), { game: this.game });
+    updateDoc(doc(this.firestore, 'games', this.gameID), { game: this.game });
   }
 }
