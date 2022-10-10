@@ -16,27 +16,25 @@ export class GameComponent implements OnInit {
   games$: Observable<any>;
   gameID: string;
   noFilter: boolean;
-  gameOver = false;
+  endGame = false;
 
 
   constructor(private route: ActivatedRoute, private router: Router, public firestore: Firestore, public dialog: MatDialog) { }
   ngOnInit(): void {
     this.newGame();
     this.openDialog();
+
     this.route.params.subscribe(newGame => {
       this.gameID = newGame['id'];
       const docRef = doc(this.firestore, 'games', this.gameID);
       this.games$ = docData(docRef);
       this.updateGame();
     });
-    // this.games$.subscribe((newGame: any) => {
-    //   console.log('Update: ', newGame);
-    // })
   }
 
 
   updateGame() {
-    this.games$.subscribe( (newGame: any) => {
+    this.games$.subscribe((newGame: any) => {
       this.getDoc(this.gameID);
       this.game.players = newGame['players'];
       this.game.stack = newGame['stack'];
@@ -55,11 +53,9 @@ export class GameComponent implements OnInit {
     await addDoc(gameCollection, { game: game.toJSON() }).then(() => {
       this.router.navigateByUrl('/game/' + this.gameID);
     });
-
-    this.gameOver = false;
   }
 
-  
+
   getDoc(params: any) {
     onSnapshot(doc(this.firestore, 'games', params), (doc) => {
       let data: any = doc.data();
@@ -76,15 +72,15 @@ export class GameComponent implements OnInit {
   // pop() => The last value is taken from the array and then it is removed
   takeCard() {
     if (!this.game.takeCardAnimation && this.game.players.length > 0) {
+      this.proveStackLength();
       this.game.currentCard = this.game.stack.pop();
-      // this.saveGame();
       this.game.takeCardAnimation = true;
 
       this.game.currentPlayer++;
       this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
       this.saveGame();
       this.cardAnimation();
-    }
+    } 
   }
 
 
@@ -97,17 +93,19 @@ export class GameComponent implements OnInit {
   }
 
 
-  // editPlayer(playerId) {
-  //   console.log('edit player', playerId);
+  proveStackLength(): void {
+    console.log('Game End', this.game.stack.length);
+    if (this.game.stack.length < 40 ) {
+      setTimeout(() => {
+        this.endGame = true;
+        console.log('Game End');
+      }, 1000);
 
-  //   const dialogRef = this.dialog.open(EditNewPlayerComponent);
-  //   dialogRef.afterClosed().subscribe((change: string) => {
-  //       if (change == 'DELETE') {
-  //         this.game.players.splice(playerId, 1)
-  //       } 
-  //       this.saveGame;
-  //   })
-  // }
+      setTimeout(() => {
+        this.router.navigateByUrl('');
+      }, 6000);
+    }
+  }
 
 
   openDialog(): void {

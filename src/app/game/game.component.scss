@@ -64,14 +64,52 @@
 }
 
 .btn-add {
-   position: absolute;
-   right: 32px;
-   bottom: 48px; 
+    position: absolute;
+    right: 32px;
+    bottom: 48px;
 }
 
 .pin-bottom {
-    position:absolute;
+    position: absolute;
     bottom: 32px;
     left: 100px;
     right: 100px;
+}
+
+.endVideo {
+    width: 100vw;
+    height: 100vh;
+    max-width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 2;
+    background-color: #00000091;
+
+    h2 {
+        font-size: 64px;
+        color: white;
+        text-align: center;
+        letter-spacing: 2px;
+        position: absolute;
+        color: #ff7100;
+        z-index: 1;
+        background: rgba(255, 255, 255, 0.7294117647);
+        padding: 16px;
+        border-radius: 10px;
+    }
+
+    video {
+        max-height: 450px;
+        max-width: 600px;
+        border-radius: 10px;
+    }
+}
+
+.showEndScreen {
+    display: flex;
 }
