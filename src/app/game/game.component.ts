@@ -12,12 +12,10 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./game.component.scss']
 })
 export class GameComponent implements OnInit {
-  takeCardAnimation = false;
-  noFilter: any;
   game: Game;
-  currentCard: string = '';
   games$: Observable<any>;
-  gameID;
+  gameID: string;
+  noFilter: boolean;
   gameOver = false;
 
 
@@ -28,7 +26,7 @@ export class GameComponent implements OnInit {
       this.gameID = newGame['id'];
       const docRef = doc(this.firestore, 'games', this.gameID);
       this.games$ = docData(docRef);
-      this.loadGame();
+      this.updateGame();
     });
     // this.games$.subscribe((newGame: any) => {
     //   console.log('Update: ', newGame);
@@ -36,13 +34,15 @@ export class GameComponent implements OnInit {
   }
 
 
-  loadGame() {
+  updateGame() {
     this.games$.subscribe( (newGame: any) => {
       this.getDoc(this.gameID);
       this.game.players = newGame['players'];
       this.game.stack = newGame['stack'];
       this.game.playedCards = newGame['playedCards'];
       this.game.currentPlayer = newGame['currentPlayer'];
+      this.game.takeCardAnimation = newGame['takeCardAnimation'];
+      this.game.currentCard = newGame['currentCard'];
     });
   }
 
@@ -58,6 +58,7 @@ export class GameComponent implements OnInit {
     this.gameOver = false;
   }
 
+  
   getDoc(params: any) {
     onSnapshot(doc(this.firestore, 'games', params), (doc) => {
       let data: any = doc.data();
@@ -68,35 +69,15 @@ export class GameComponent implements OnInit {
 
   async newGame() {
     this.game = new Game();
-    // const gameCollection = collection(this.firestore, 'games');
-    // const gameDocumentReference = await addDoc(gameCollection, { game: this.game.toJSON() });
-    // const newGameRef = doc(collection(gameCollection, "games"));
-    // await setDoc(newGameRef, this.game);
-
-    // this.route.params.subscribe((params) => {
-    //   console.log(params['id']);
-    // });
-
-    //   const gameCollection = collection(this.firestore, 'games');
-
-    //   const gameDocumentReference = doc(this.firestore, 'games');
-    //   docData(gameDocumentReference, { idField: 'gameid' });
-    //   addDoc(gameCollection, { game: this.game.toJSON() });
-    //   doc(gameCollection), (params['gameid']);
-    //   console.log('Update', this.game);
-    // });
-
-    // const gameCollection = collection(this.firestore, 'games');
-    // let gameInfo = await addDoc(gameCollection, { game: this.game.toJSON() });
-    // console.log(gameInfo);
   }
 
 
   // pop() => The last value is taken from the array and then it is removed
   takeCard() {
-    if (!this.takeCardAnimation && this.game.players.length > 0) {
-      this.currentCard = this.game.stack.pop();
-      this.takeCardAnimation = true;
+    if (!this.game.takeCardAnimation && this.game.players.length > 0) {
+      this.game.currentCard = this.game.stack.pop();
+      this.saveGame();
+      this.game.takeCardAnimation = true;
 
       this.game.currentPlayer++;
       this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
@@ -108,8 +89,9 @@ export class GameComponent implements OnInit {
 
   cardAnimation() {
     setTimeout(() => {
-      this.takeCardAnimation = false;
-      this.game.playedCards.push(this.currentCard);
+      this.game.takeCardAnimation = false;
+      this.game.playedCards.push(this.game.currentCard);
+      this.saveGame();
     }, 1000);
   }
 

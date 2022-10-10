@@ -3,6 +3,8 @@ import { addDoc } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { Firestore, collection } from '@angular/fire/firestore';
 import { Game } from 'src/models/game';
+import { MatDialog } from '@angular/material/dialog';
+import { GameInstructionComponent } from '../game-instruction/game-instruction.component';
 
 @Component({
   selector: 'app-start-screen',
@@ -13,7 +15,7 @@ export class StartScreenComponent implements OnInit {
   btnAnimation = false;
   btnFire = false;
 
-  constructor(private router: Router, private firestore: Firestore) { }
+  constructor(private router: Router, private firestore: Firestore, public dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
@@ -21,8 +23,8 @@ export class StartScreenComponent implements OnInit {
 
   async newGame() {
     let game = new Game();
-
     const gameCollection = collection(this.firestore, 'games');
+
     await addDoc(gameCollection, { game: game.toJSON() }).then((gameInfo: any) => {
         this.btnAnimation = true;
         this.btnFire = true;
@@ -33,20 +35,8 @@ export class StartScreenComponent implements OnInit {
       });
   }
 
-  // async newGame() {
-  //   let game = new Game();
 
-  //   const gameCollection = collection(this.firestore, 'games');
-  //   const docRef = await addDoc(gameCollection, { game: game.toJSON() }).then(gameinfo: any) => {
-  //     this.router.navigateByUrl('/game/' + gameinfo.id);
-  //   }
-
-  //   this.btnAnimation = true;
-  //   this.btnFire = true;
-
-  //   setTimeout(() => {
-  //     this.router.navigateByUrl('/game/' + docRef.id);
-  //   }, 2000);
-  // }
-
+  openDialog(): void {
+    this.dialog.open(GameInstructionComponent);
+  }
 }

@@ -14,6 +14,29 @@
     }
 }
 
+.btn-info {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    background-color: #ff6300;
+    z-index: 1;
+
+    &:hover {
+        cursor: pointer;
+        filter: brightness(1.2);
+    }
+}
+
+.material-icons {
+    font-size: 42px;
+}
+
+.mat-icon {
+    height: 52px;
+    width: 56px;
+    margin-top: -16px;
+}
+
 .start-label-box {
     position: absolute;
     left: 0;
