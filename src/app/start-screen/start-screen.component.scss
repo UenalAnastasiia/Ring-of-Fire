@@ -55,6 +55,18 @@
         font-weight: 600;
         margin-top: 0;
         margin-bottom: 82px;
+
+        @media (max-width: 850px) {
+            font-size: 84px;
+        }
+
+        @media (max-width: 600px) {
+            font-size: 54px;
+        }
+
+        @media (max-width: 400px) {
+            font-size: 40px;
+        }
     }
 
     button {
@@ -70,6 +82,18 @@
         &:hover {
             cursor: pointer;
             filter: brightness(1.2);
+        }
+
+        @media (max-width: 850px) {
+            font-size: 38px;
+        }
+
+        @media (max-width: 600px) {
+            font-size: 28px;
+        }
+
+        @media (max-width: 400px) {
+            font-size: 24px;
         }
     }
 }
@@ -196,12 +220,37 @@
     margin-left: 90px;
     margin-bottom: 24px;
     max-width: 450px;
+
+    @media (max-width: 850px) {
+        max-width: 350px;
+    }
+
+    @media (max-width: 600px) {
+        max-width: 270px;
+    }
+
+    @media (max-width: 400px) {
+        max-width: 230px;
+        margin-bottom: 18px;
+        margin-left: 80px;
+    }
+
+    @media (max-width: 310px) {
+        width: 220px;
+        margin-bottom: 18px;
+        margin-left: 80px;
+    }
 }
 
 #svg-view {
     width: 252px;
     height: 125px;
     left: 0px;
+
+    @media (max-width: 310px) {
+        height: 110px;
+        width: 220px;
+    }
 }
 
 .mo-fire svg {

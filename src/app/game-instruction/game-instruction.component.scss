@@ -10,6 +10,11 @@
     -webkit-text-stroke: 1px black;
     margin-bottom: 42px;
     letter-spacing: 2px;
+
+    @media (max-width: 400px) {
+        margin-bottom: 20px;
+        font-size: 42px;
+    }
 }
 
 .mat-dialog-content {
@@ -21,9 +26,19 @@
         font-size: 24px;
         font-weight: 600;
         margin-bottom: 42px;
+
+        @media (max-width: 400px) {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+    }
+
+    @media (max-width: 950px) {
+        max-width: 80vw;
     }
 }
 
 button {
     background: orange;
+    margin-top: -24px;
 }
