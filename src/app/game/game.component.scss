@@ -32,6 +32,26 @@
     img {
         position: absolute;
         width: 120px;
+
+        @media (max-width: 600px) {
+            width: 100px;
+        }
+
+        @media (max-width: 450px) {
+            width: 90px;
+        }
+    }
+
+    @media (max-width: 600px) {
+        position: absolute;
+        bottom: 40%;
+        left: 40%;
+    }
+
+    @media (max-width: 350px) {
+        position: absolute;
+        bottom: 40%;
+        left: 50%;
     }
 }
 
@@ -54,6 +74,22 @@
     z-index: 1;
     right: 25px;
     transform: scale(1.3) translateX(150px) translateY(-200px) rotate(-10deg);
+
+    @media (max-width: 600px) {
+        transform: scale(1.3) translateX(120px) translateY(-160px) rotate(-10deg);
+    }
+
+    @media (max-width: 450px) {
+        transform: scale(1.3) translateX(110px) translateY(-110px) rotate(-10deg);
+    }
+
+    @media (max-width: 375px) {
+        transform: scale(1.3) translateX(110px) translateY(-110px) rotate(-10deg);
+    }
+
+    @media (max-width: 300px) {
+        transform: scale(1.3) translateX(90px) translateY(-110px) rotate(-10deg);
+    }
 }
 
 @keyframes take-card-animation {
@@ -62,15 +98,15 @@
     }
 
     30% {
-        transform: scale(1.7);
+        transform: scale(1.4);
     }
 
     60% {
-        transform: scale(1.7);
+        transform: scale(1.4);
     }
 
     100% {
-        transform: scale(1.3) translateX(150px) translateY(-200px) rotate(-10deg);
+        transform: scale(1.2) translateX(120px) translateY(-200px) rotate(-10deg);
     }
 }
 
@@ -84,11 +120,33 @@
     top: 0;
     z-index: 1;
     padding: 6px;
+
+    @media (max-width: 600px) {
+        max-height: 200px;
+    }
+
+    @media (max-width: 375px) {
+        left: 0;
+        width: 200px;
+        max-height: 150px !important;
+
+        .player-position {
+            left: 0;
+        }
+    }
+
+    @media (height: 720px) {
+        max-height: 150px;
+    }
 }
 
 *::-webkit-scrollbar {
     display: block;
     width: 16px;
+
+    @media (max-width: 350px) {
+        width: 8px;
+    }
 }
 
 *::-webkit-scrollbar-button {
@@ -130,6 +188,11 @@
             margin-top: -22px;
         }
     }
+
+    @media (max-width: 400px) {
+        right: 24px;
+        top: 74px;
+    }
 }
 
 .pin-bottom {
@@ -139,7 +202,7 @@
     right: 100px;
 
     @media (max-width: 850px) {
-        bottom: 16px;
+        bottom: 8px;
         left: 16px;
         right: 16px;
     }
