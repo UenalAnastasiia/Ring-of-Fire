@@ -97,12 +97,10 @@ export class GameComponent implements OnInit {
 
 
   proveStackLength(): void {
-    console.log('Game End', this.game.stack.length);
     if (this.game.stack.length <= 42) {
       this.game.takeCardAnimation = false;
       setTimeout(() => {
         this.game.endGame = true;
-        console.log('Game End');
       }, 3000);
 
       setTimeout(() => {

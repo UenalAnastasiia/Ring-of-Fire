@@ -13,9 +13,8 @@ export class GameInstructionComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onNoClick() {
+
+  closeModal() {
     this.dialogRef.close();
   }
-
-
 }

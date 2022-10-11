@@ -1,13 +1,18 @@
-<app-player *ngFor="let player of game.players; let i = index;" [ngStyle]="{'top.px': 100 + i * 90}"
-    [activePlayer]="i == game.currentPlayer" [name]="player" class="player-position"></app-player>
+<div class="player-container">
+    <app-player *ngFor="let player of game.players; let i = index;" [ngStyle]="{'top.px': 10 + i * 50}"
+        [activePlayer]="i == game.currentPlayer" [name]="player" class="player-position"></app-player>
+</div>
+
+<div class="home-btn">
+    <a routerLink="/"><img src="assets/img/home.png"></a>
+</div>
 
 <div class="game-container">
     <div class="card-stack">
         <!-- Card stack -->
         <img *ngFor="let c of [0,1,2,3]; let i = index;" [ngStyle]="{'right.px': i * 5}"
             src="assets/img/cards/card_cover.png">
-        <img (click)="takeCard()" class="top-card" style="right: 25px;"
-            src="assets/img/cards/card_cover.png">
+        <img (click)="takeCard()" class="top-card" style="right: 25px;" src="assets/img/cards/card_cover.png">
 
         <!-- Stack for played cards -->
         <img *ngFor="let card of game.playedCards" class="played-card" src="assets/img/cards/{{ card }}.png">
