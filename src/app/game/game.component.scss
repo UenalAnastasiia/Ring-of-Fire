@@ -2,7 +2,7 @@
     width: 100vw;
     height: 100vh;
     max-width: 100%;
-    background-image: url('/assets/img/sand.jpg');
+    background-image: url('/assets/img/bg2.jpg');
     // background-image: url('../../assets/img/board.jpg');
     background-size: cover;
     display: flex;
@@ -21,7 +21,6 @@
 
 .top-card {
     cursor: pointer;
-    filter: none !important;
     transition: all 225ms ease-in-out;
 
     &:hover {
@@ -30,7 +29,7 @@
 }
 
 .take-card {
-    animation: take-card-animation 1s ease-in-out;
+    animation: take-card-animation 2s ease-in-out;
     transform: scale(1.3) translateX(150px) translateY(-200px) rotate(-10deg);
 }
 
@@ -92,14 +91,15 @@
 
     h2 {
         font-size: 64px;
+        font-weight: 600;
         color: white;
         text-align: center;
         letter-spacing: 2px;
         position: absolute;
         color: #ff7100;
         z-index: 1;
-        background: rgba(255, 255, 255, 0.7294117647);
-        padding: 16px;
+        background-color: rgb(244 241 231 / 82%);
+        padding: 10px;
         border-radius: 10px;
     }
 

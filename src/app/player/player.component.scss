@@ -23,8 +23,8 @@
 .activePlayer {
     background-color: rgb(255, 102, 0);
     // animation: colorchange 7s infinite;
-    animation: colorchange 7s steps(10) forwards;;
-    animation-fill-mode: forwards;
+    animation: colorchange 5s steps(10) forwards;
+    // animation-fill-mode: forwards;
 }
 
 @keyframes colorchange {

@@ -15,14 +15,14 @@ export class GameComponent implements OnInit {
   game: Game;
   games$: Observable<any>;
   gameID: string;
-  noFilter: boolean;
-  endGame = false;
 
 
   constructor(private route: ActivatedRoute, private router: Router, public firestore: Firestore, public dialog: MatDialog) { }
   ngOnInit(): void {
     this.newGame();
-    this.openDialog();
+    setTimeout(() => {
+      this.openDialog();
+    }, 1000);
 
     this.route.params.subscribe(newGame => {
       this.gameID = newGame['id'];
@@ -41,6 +41,7 @@ export class GameComponent implements OnInit {
       this.game.playedCards = newGame['playedCards'];
       this.game.currentPlayer = newGame['currentPlayer'];
       this.game.takeCardAnimation = newGame['takeCardAnimation'];
+      this.game.endGame = newGame['endGame'];
       this.game.currentCard = newGame['currentCard'];
     });
   }
@@ -71,7 +72,9 @@ export class GameComponent implements OnInit {
 
   // pop() => The last value is taken from the array and then it is removed
   takeCard() {
-    if (!this.game.takeCardAnimation && this.game.players.length > 0) {
+    if (this.game.players.length < 2) {
+      this.openDialog();
+    } else if (!this.game.takeCardAnimation) {
       this.proveStackLength();
       this.game.currentCard = this.game.stack.pop();
       this.game.takeCardAnimation = true;
@@ -80,7 +83,7 @@ export class GameComponent implements OnInit {
       this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
       this.saveGame();
       this.cardAnimation();
-    } 
+    }
   }
 
 
@@ -95,11 +98,12 @@ export class GameComponent implements OnInit {
 
   proveStackLength(): void {
     console.log('Game End', this.game.stack.length);
-    if (this.game.stack.length < 40 ) {
+    if (this.game.stack.length <= 42) {
+      this.game.takeCardAnimation = false;
       setTimeout(() => {
-        this.endGame = true;
+        this.game.endGame = true;
         console.log('Game End');
-      }, 1000);
+      }, 3000);
 
       setTimeout(() => {
         this.router.navigateByUrl('');
@@ -114,7 +118,6 @@ export class GameComponent implements OnInit {
     dialogRef.afterClosed().subscribe((name: string) => {
       if (name && name.length > 0) {
         this.game.players.push(name);
-        this.noFilter = true;
         this.saveGame();
       }
     });

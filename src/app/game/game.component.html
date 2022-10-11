@@ -6,7 +6,7 @@
         <!-- Card stack -->
         <img *ngFor="let c of [0,1,2,3]; let i = index;" [ngStyle]="{'right.px': i * 5}"
             src="assets/img/cards/card_cover.png">
-        <img (click)="takeCard()" [class.top-card]="noFilter" style="right: 25px; filter: blur(2px);"
+        <img (click)="takeCard()" class="top-card" style="right: 25px;"
             src="assets/img/cards/card_cover.png">
 
         <!-- Stack for played cards -->
@@ -24,7 +24,7 @@
     <mat-icon>add</mat-icon>
 </button>
 
-<div class="endVideo" [class.showEndScreen]="endGame">
+<div class="endVideo" [class.showEndScreen]="game.endGame">
     <h2>Good work! <br> <br> Game is over!</h2>
     <video loop autoplay src="assets/video/end.mp4"></video>
 </div>
