@@ -1,4 +1,6 @@
 <mat-card>
     <mat-card-title> {{ card ? title : 'Please pick a card' }} </mat-card-title>
-    <mat-card-content> {{  card ? description : 'Please click on the card stack to select the next card' }} </mat-card-content>
+    <button class="openBtn" (click)="openContent()" [class.hide]="hideBtn" mat-raised-button color="primary">Read more</button>
+    <button class="closeBtn" (click)="closeContent()" [class.show]="hideContent" mat-raised-button color="primary">Close Text</button>
+    <mat-card-content [class.show]="contentText"> {{  card ? description : 'Please click on the card stack to select the next card' }} </mat-card-content>
 </mat-card>

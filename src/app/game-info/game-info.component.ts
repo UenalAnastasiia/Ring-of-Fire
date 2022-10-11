@@ -25,6 +25,9 @@ export class GameInfoComponent implements OnInit, OnChanges {
   title = '';
   description = '';
   @Input() card: string;
+  contentText = false;
+  hideBtn = false;
+  hideContent = false;
 
   constructor() { }
 
@@ -37,6 +40,18 @@ export class GameInfoComponent implements OnInit, OnChanges {
       this.title = this.cardAction[cardNumber- 1].title;
       this.description = this.cardAction[cardNumber- 1].description;
     }
+  }
+
+  openContent() {
+    this.contentText = true;
+    this.hideBtn = true;
+    this.hideContent = true;
+  }
+
+  closeContent() {
+    this.contentText = false;
+    this.hideBtn = false;
+    this.hideContent = false;
   }
 
 }

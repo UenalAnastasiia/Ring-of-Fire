@@ -1,0 +1,39 @@
+@media (max-width: 500px) {
+    mat-card-content {
+        display: none;
+    }
+}
+
+mat-card-title:hover {
+    cursor: pointer;
+}
+
+.show {
+    display: block !important;
+}
+
+.hide {
+    display: none !important;
+}
+
+.openBtn{
+    display: none;
+
+    &:hover {
+        cursor: pointer;
+        filter: brightness(1.2);
+    }
+
+    @media (max-width: 500px) {
+        display: block;
+    }
+}
+
+.closeBtn {
+    display: none;
+
+    &:hover {
+        cursor: pointer;
+        filter: brightness(1.2);
+    }
+}
