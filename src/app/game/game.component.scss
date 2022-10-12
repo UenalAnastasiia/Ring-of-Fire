@@ -40,6 +40,10 @@
         @media (max-width: 450px) {
             width: 90px;
         }
+
+        @media (max-width: 300px) {
+            width: 70px;
+        }
     }
 
     @media (max-width: 600px) {
@@ -234,12 +238,28 @@
         background-color: rgb(244 241 231 / 82%);
         padding: 10px;
         border-radius: 10px;
+
+        @media (max-width: 500px) {
+            font-size: 42px;
+        }
+
+        @media (max-width: 300px) {
+            font-size: 24px;
+        }
     }
 
     video {
         max-height: 450px;
         max-width: 600px;
         border-radius: 10px;
+
+        @media (max-width: 500px) {
+            width: 350px;
+        }
+
+        @media (max-width: 300px) {
+            width: 270px;
+        }
     }
 }
 

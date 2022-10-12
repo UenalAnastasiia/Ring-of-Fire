@@ -14,6 +14,10 @@
     }
 }
 
+mat-card {
+    z-index: 1;
+}
+
 mat-card-title:hover {
     cursor: pointer;
 }
